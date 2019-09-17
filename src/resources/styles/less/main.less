@@ -1,0 +1,137 @@
+.main_wrapper {
+
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    font-family: @main-font;
+}
+
+.description {
+
+    flex-basis: 37%;
+    background:@description-bg;
+    padding: 5rem;
+    position: relative;
+
+    &_navbar {
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: @dark-font;
+        font-size: 1.3rem;
+
+        &.button {
+
+            margin-right: 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &.bar {
+
+                height: 2px;
+                width: 1.9rem;
+                background: @dark-font;
+
+                &:last-child {
+
+                    margin-top: 4px;
+                }
+            }
+            
+            
+        }
+
+        &.item {
+
+            margin-right: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 600;
+
+        }
+    }
+
+    &_title {
+
+        font-size: 4rem;
+        color: @dark-font;
+        text-transform: capitalize;
+        text-align: center;
+        margin: 10rem 5rem 0 auto;
+
+    }
+
+    &_subtitle {
+
+        font-size: 1.6rem;
+        color: @dark-font;
+        text-align: center;
+        margin: 0 6rem 7rem auto;
+        font-weight: 500;
+
+    }
+
+    &_specification {
+
+        display: flex;
+        font-size: 1.4rem;
+        text-transform: capitalize;
+        margin: 0 0 2rem 0;
+
+        &_title {
+
+            color: @light-font;
+            margin: 0 5.5rem 0 0;
+            display: flex;
+            flex-basis: 7.5rem;
+
+        }
+
+        &_value {
+
+            color: @dark-font;
+
+            &.wrapper {
+
+                display: flex;
+
+                & > p:first-child {
+
+                   margin-right: 5rem;
+                   width: 7rem;
+                }
+            }
+        }
+    }
+
+}
+
+.craousel_controller {
+
+    &.left {
+
+        background: @dark-font;
+        height: 3.6rem;
+        width: 3.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        top: 10rem;
+    }
+}
+
+.gender {
+
+   // display: flex;
+    //justify-content: center;
+}
+
+.picture {
+
+    flex-basis: 63%;
+
+}
