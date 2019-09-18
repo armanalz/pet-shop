@@ -22,7 +22,9 @@ class Main extends Component {
                     </div>
 
                     <div className="craousel_controller left">
-                        <Icon name="left-arrow"/>
+                        <div className="craousel_controller_btn left">
+                           <Icon name="left-arrow"/>
+                        </div>                    
                     </div>
 
                     <h1 className="description_title">vizsla</h1>
@@ -50,10 +52,7 @@ class Main extends Component {
                         <div className="description_specification_value wrapper">
                            <Icon name="shapes-and-symbols"/>
                            <Icon name="shapes-and-symbols-1"/>
-                        </div>
-
-                        
-
+                        </div>  
                     </div>
 
                     <div className="description_specification">
@@ -72,9 +71,37 @@ class Main extends Component {
                         </div>
                     </div>
 
+                    <div className="description_footer">
+                        <p className="description_footer_item">maintenance & care</p>
+                        <p className="description_footer_item">learning & education</p>
+                        <p className="description_footer_item">helas & diseases</p>
+                    </div>
+
                 </div> {/* description */}
 
-                <div className="picture"></div>
+                <div className="picture">
+
+                    <div className="picture_large">
+                        <div className="craousel_controller right">
+                            <div className="craousel_controller_btn right">
+                                 <Icon name="left-arrow"/>
+                            </div>                    
+                        </div>
+                    </div>
+                   
+                    <div className="picture_intro">
+                        <div className="picture_intro_img">
+                            <img src={require('../resources/img/slide2.jpg')}/>
+                        </div>
+                        <div className="picture_intro_txt">
+                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+                        </div>
+                    </div>
+
+                </div> {/* picture */}
                 
             </main>
         );

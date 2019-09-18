@@ -37,15 +37,14 @@ COLORS
 */
 .main_wrapper {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  width: 100%;
+  height: 100%;
   font-family: 'Roboto Condensed', sans-serif;
 }
 .description {
   flex-basis: 37%;
   background: #FDFDFD;
   padding: 5rem;
-  position: relative;
 }
 .description_navbar {
   display: flex;
@@ -53,6 +52,7 @@ COLORS
   align-items: center;
   color: #222222;
   font-size: 1.3rem;
+  height: 2rem;
 }
 .description_navbar.button {
   margin-right: 5rem;
@@ -79,7 +79,7 @@ COLORS
   color: #222222;
   text-transform: capitalize;
   text-align: center;
-  margin: 10rem 5rem 0 auto;
+  margin: 3rem 5rem 0 auto;
 }
 .description_subtitle {
   font-size: 1.6rem;
@@ -110,19 +110,75 @@ COLORS
   margin-right: 5rem;
   width: 7rem;
 }
+.description_footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8rem 0 0 0;
+}
+.description_footer_item {
+  font-size: 1.3rem;
+  color: #a7a6a6;
+}
 .craousel_controller.left {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 3rem -5rem 0 0;
+}
+.craousel_controller.right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10rem 0 0 0;
+}
+.craousel_controller_btn {
   background: #222222;
   height: 3.6rem;
   width: 3.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 0;
-  top: 10rem;
+}
+.craousel_controller_btn.left {
+  background: #222222;
+}
+.craousel_controller_btn.right {
+  background: #FDFDFD;
+}
+.craousel_controller_btn.right > * {
+  transform: rotate(180deg);
 }
 .picture {
+  display: flex;
+  flex-direction: column;
   flex-basis: 63%;
+  position: relative;
+}
+.picture_large {
+  flex-basis: 85%;
+  background: url(../../img/slide1.jpg);
+  background-size: cover;
+}
+.picture_intro {
+  display: flex;
+  flex-basis: 15%;
+  background: #a7a6a6;
+}
+.picture_intro_img {
+  flex-basis: 35%;
+}
+.picture_intro_img > img {
+  height: 25rem;
+  margin: -10rem 5rem 5rem 5rem;
+}
+.picture_intro_txt {
+  flex-basis: 65%;
+  padding: 2rem 7rem 0 0;
+  font-size: 1.5rem;
+  color: #222222;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 .left-arrow {
   fill: #a7a6a6;

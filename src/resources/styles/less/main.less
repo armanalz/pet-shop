@@ -1,8 +1,8 @@
 .main_wrapper {
 
     display: flex;
-    height: 100vh;
-    width: 100vw;
+    width:100%;
+    height: 100%;
     font-family: @main-font;
 }
 
@@ -11,7 +11,6 @@
     flex-basis: 37%;
     background:@description-bg;
     padding: 5rem;
-    position: relative;
 
     &_navbar {
 
@@ -20,6 +19,7 @@
         align-items: center;
         color: @dark-font;
         font-size: 1.3rem;
+        height: 2rem;
 
         &.button {
 
@@ -51,7 +51,8 @@
             font-weight: 600;
 
         }
-    }
+
+    } //navbar
 
     &_title {
 
@@ -59,7 +60,7 @@
         color: @dark-font;
         text-transform: capitalize;
         text-align: center;
-        margin: 10rem 5rem 0 auto;
+        margin: 3rem 5rem 0 auto;
 
     }
 
@@ -104,13 +105,45 @@
                 }
             }
         }
+
+    } //specification
+
+    &_footer {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 8rem 0 0 0;
+
+        &_item {
+
+            font-size: 1.3rem;
+            color: @light-font;
+
+        }
     }
 
-}
+} //description
 
 .craousel_controller {
 
     &.left {
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 3rem -5rem 0 0;
+    }
+
+    &.right {
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10rem 0 0 0;
+    }
+
+    &_btn {
 
         background: @dark-font;
         height: 3.6rem;
@@ -118,20 +151,72 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
-        right: 0;
-        top: 10rem;
+
+        &.left {
+
+            background: @dark-font;
+        }
+    
+        &.right {
+    
+            background: @description-bg;
+
+            & > * {
+
+                transform: rotate(180deg)
+            }
+        }
+
     }
 }
 
 .gender {
 
-   // display: flex;
-    //justify-content: center;
 }
 
 .picture {
 
+    display: flex;
+    flex-direction: column;
     flex-basis: 63%;
+    position: relative;
 
-}
+    &_large {
+
+        flex-basis: 85%;
+        background: url(../../img/slide1.jpg);
+        background-size: cover;
+
+    }
+
+    &_intro {
+
+        display: flex;
+        flex-basis:15%;
+        background:@light-font;
+
+        &_img {
+             
+            flex-basis: 35%;
+           
+
+            & > img {
+
+                height: 25rem;
+                margin: -10rem 5rem 5rem 5rem;
+            }
+        }
+
+        &_txt {
+
+            flex-basis: 65%;
+            padding: 2rem 7rem 0 0;
+            font-size: 1.5rem;
+            color: @dark-font;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+    }
+
+} //picture
