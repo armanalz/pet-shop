@@ -1,8 +1,11 @@
 .main_wrapper {
 
     display: flex;
+    flex-direction: row;
     width:100%;
+    max-width:180rem;
     height: 100%;
+    margin: 0 auto;
     font-family: @main-font;
 }
 
@@ -11,6 +14,7 @@
     flex-basis: 37%;
     background:@description-bg;
     padding: 5rem;
+    height: 100%;
 
     &_navbar {
 
@@ -127,6 +131,8 @@
 
 .craousel_controller {
 
+    cursor: pointer;
+
     &.left {
 
         display: flex;
@@ -145,25 +151,40 @@
 
     &_btn {
 
-        background: @dark-font;
         height: 3.6rem;
         width: 3.6rem;
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
+       
 
         &.left {
 
             background: @dark-font;
+
+            &:hover > .left-arrow  {
+
+                fill: @description-bg;
+            }
         }
     
         &.right {
     
             background: @description-bg;
+            position: absolute;
+            top:10rem;
+            left: 0;
+            z-index: +999999;
 
             & > * {
 
                 transform: rotate(180deg)
+            }
+
+            &:hover > .left-arrow  {
+
+                fill: @dark-font;
             }
         }
 
@@ -179,31 +200,41 @@
     display: flex;
     flex-direction: column;
     flex-basis: 63%;
+    height: 100%;
     position: relative;
+
 
     &_large {
 
-        flex-basis: 85%;
-        background: url(../../img/slide1.jpg);
-        background-size: cover;
+        height: 90rem;
+        background-size:cover;
 
     }
 
     &_intro {
 
         display: flex;
-        flex-basis:15%;
+        flex-direction: row;
+        flex-basis:auto;
         background:@light-font;
+        align-self: stretch;
+        flex-shrink: 0;
+        flex-grow: 1;
 
         &_img {
              
             flex-basis: 35%;
+            z-index:999999;
+            
            
 
             & > img {
 
                 height: 25rem;
+                width: 18rem;
                 margin: -10rem 5rem 5rem 5rem;
+                border-radius: 2px;
+               
             }
         }
 

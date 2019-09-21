@@ -1,8 +1,82 @@
 import React, { Component } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
 import Icon from './utilities/Icon';
 
+
 class Main extends Component {
+
+    state = {
+
+        i : 0,
+
+        petSpecifications : {
+
+            name: ["vizsla","vadim","olian","fritz"],
+            type: ["hunting dog","domestic dog","bull dog","trier"],
+            lifeSpan: ["12-15","11-14","13-16","10-13"],
+            temperment: ["affectionate, energetic, faithful, calm, tender",
+                         "vigorous, faithful, calm, tender",
+                         "funny, faithful, calm, tender",
+                         "strong, faithful, calm, tender"
+                        ],
+            size: ["large","medium-sized","small","large"],
+            maleWight: ["65-77","45-66","41-62","60-71"],
+            femaleWight: ["61-73","42-63","37-58","56-67"],
+            maleHeight: ["42-45","22-25","18-21","38-41"],
+            femaleHeight: ["40-42","20-22","16-19","35-39"],
+            description: ["lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+                          "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+                          "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+                          "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet"]
+
+          }
+    }
+    renderThumb = ({ style, ...props }) => {
+        const { top } = this.state;
+        const thumbStyle = {
+            backgroundColor: "#FDFDFD",
+            borderRadius: 2,
+         
+        };
+        return (
+            <div
+                style={{ ...style, ...thumbStyle }}
+                {...props}/>
+        );
+    }
+
+ renderTrackVertical = ({ style, ...props }) => {
+        const finalStyle = {
+            ...style,
+            right: "35px",
+            bottom: "60px",
+            top: "60px",
+            borderRadius: 2,
+            backgroundColor: '#555'
+        };
+        return <div style={finalStyle} {...props} />;
+    }
+
     render() {
+
+        let bg,img
+
+        if( this.state.i < 0 ) {
+
+            this.setState({ i:3})
+            
+        }else if(this.state.i > 3){
+
+            this.setState({ i:0})
+            
+        }else {
+            bg = require(`../resources/img/slide-${this.state.i}.jpg`)
+            img = require(`../resources/img/img-${this.state.i}.jpg`)
+        }
+        
+       
+        
+
         return (
             <main className="main_wrapper">
 
@@ -22,29 +96,40 @@ class Main extends Component {
                     </div>
 
                     <div className="craousel_controller left">
-                        <div className="craousel_controller_btn left">
+                        <div className="craousel_controller_btn left"
+                             onClick={() => {this.setState({
+                                 i: this.state.i-1
+                             })}}>
                            <Icon name="left-arrow"/>
                         </div>                    
                     </div>
 
-                    <h1 className="description_title">vizsla</h1>
-                    <h4 className="description_subtitle">hunting dog</h4>
+                    <h1 className="description_title">
+                       {this.state.petSpecifications.name[this.state.i]}
+                    </h1>
+                    <h4 className="description_subtitle">
+                       {this.state.petSpecifications.type[this.state.i]}
+                    </h4>
 
                     <div className="description_specification">
                         <p className="description_specification_title">life span</p>
-                        <p className="description_specification_value">12-15 years</p>
+                        <p className="description_specification_value">
+                           {this.state.petSpecifications.lifeSpan[this.state.i]} years
+                        </p>
                     </div>
 
                     <div className="description_specification">
                         <p className="description_specification_title">temperment</p>
-                        <p className="description_specification_value">affectionate, energetic, faithful, 
-                                                           calm, tender
+                        <p className="description_specification_value">
+                           {this.state.petSpecifications.temperment[this.state.i]}
                         </p>
                     </div>
 
                     <div className="description_specification">
                         <p className="description_specification_title">size</p>
-                        <p className="description_specification_value">medium-sized</p>
+                        <p className="description_specification_value">
+                           {this.state.petSpecifications.size[this.state.i]}
+                        </p>
                     </div>
 
                     <div className="description_specification gender">
@@ -58,16 +143,24 @@ class Main extends Component {
                     <div className="description_specification">
                         <p className="description_specification_title">wight</p>
                         <div className="description_specification_value wrapper">
-                            <p className="description_specification_value">45-66 lb</p>
-                            <p className="description_specification_value">40-55 lb</p>
+                            <p className="description_specification_value">
+                               {this.state.petSpecifications.maleWight[this.state.i]} lb
+                            </p>
+                            <p className="description_specification_value">
+                               {this.state.petSpecifications.femaleWight[this.state.i]} lb
+                            </p>
                         </div>
                     </div>
 
                     <div className="description_specification">
                         <p className="description_specification_title">height</p>
                         <div className="description_specification_value wrapper">
-                            <p className="description_specification_value">22-25 in</p>
-                            <p className="description_specification_value">21-24 in</p>
+                            <p className="description_specification_value">
+                               {this.state.petSpecifications.maleHeight[this.state.i]} in
+                            </p>
+                            <p className="description_specification_value">
+                               {this.state.petSpecifications.femaleHeight[this.state.i]} in
+                            </p>
                         </div>
                     </div>
 
@@ -81,23 +174,33 @@ class Main extends Component {
 
                 <div className="picture">
 
-                    <div className="picture_large">
-                        <div className="craousel_controller right">
-                            <div className="craousel_controller_btn right">
-                                 <Icon name="left-arrow"/>
-                            </div>                    
+                
+                <div className="craousel_controller_btn right"
+                                onClick={() => {this.setState({
+                                    i: this.state.i+1
+                                })}}
+                            >
+                                <Icon name="left-arrow"/>
+                            </div>                 
+                  
+
+                   <Scrollbars style={{flexBasis:"46rem",zIndex:"9"}} renderThumbHorizontal={this.renderThumb}
+                               renderThumbVertical={this.renderThumb} renderTrackHorizontal={this.renderTrackHorizontal}
+                               renderTrackVertical={this.renderTrackVertical}
+                   >
+                        <div className="picture_large"
+                            style={{backgroundImage:`url(${bg})`}}
+                        >
+                            
                         </div>
-                    </div>
+                   </Scrollbars>
                    
                     <div className="picture_intro">
                         <div className="picture_intro_img">
-                            <img src={require('../resources/img/slide2.jpg')}/>
+                            <img src={img}/>
                         </div>
                         <div className="picture_intro_txt">
-                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-                            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+                           {this.state.petSpecifications.description[this.state.i]}
                         </div>
                     </div>
 

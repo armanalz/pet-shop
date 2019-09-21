@@ -1,6 +1,7 @@
 import React from 'react';
 import SVG from '../../resources/img/sprite.svg';
 
+
 const Icon = (props) => {
     return (
 
