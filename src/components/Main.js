@@ -8,6 +8,7 @@ class Main extends Component {
     state = {
 
         i : 0,
+        openMenu:false,
 
         petSpecifications : {
 
@@ -31,9 +32,11 @@ class Main extends Component {
 
           }
     }
+
     renderThumb = ({ style, ...props }) => {
         const { top } = this.state;
         const thumbStyle = {
+
             backgroundColor: "#FDFDFD",
             borderRadius: 2,
          
@@ -45,7 +48,7 @@ class Main extends Component {
         );
     }
 
- renderTrackVertical = ({ style, ...props }) => {
+    renderTrackVertical = ({ style, ...props }) => {
         const finalStyle = {
             ...style,
             right: "35px",
@@ -57,9 +60,17 @@ class Main extends Component {
         return <div style={finalStyle} {...props} />;
     }
 
+    menuHandler = () => {
+
+        this.setState({
+
+            openMenu:!this.state.openMenu
+        })
+    }
+
     render() {
 
-        let bg,img
+        let bg,img,transform
 
         if( this.state.i < 0 ) {
 
@@ -72,9 +83,16 @@ class Main extends Component {
         }else {
             bg = require(`../resources/img/slide-${this.state.i}.jpg`)
             img = require(`../resources/img/img-${this.state.i}.jpg`)
-        }
+        } 
         
-       
+        if(this.state.openMenu) {
+
+            transform = "scale(0) translateX(50px)"
+
+        }else {
+
+            transform = "scale(1) translateX(70px)"
+        }
         
 
         return (
@@ -84,14 +102,24 @@ class Main extends Component {
 
                     <div className="description_navbar">
 
-                        <div className="description_navbar button">
+                        <div className="description_navbar button"
+                             onClick={() => this.menuHandler()}
+                        >
                            <div className="description_navbar button bar"></div>
+                           <div className="description_navbar button bar"
+                                style={{visibility:this.state.openMenu ? "visible" : "hidden"}}
+                           >      
+                           </div>
                            <div className="description_navbar button bar"></div>
                         </div>
-                        <div className="description_navbar item">dogs</div>
-                        <div className="description_navbar item">articles</div>
-                        <div className="description_navbar item">about</div>
-                        <div className="description_navbar item">contact</div>
+                        <div className="description_navbar wrapper"
+                             style={{transform:transform}}
+                        >
+                            <div className="description_navbar item">dogs</div>
+                            <div className="description_navbar item">articles</div>
+                            <div className="description_navbar item">about</div>
+                            <div className="description_navbar item">contact</div>
+                        </div>
 
                     </div>
 
@@ -175,16 +203,17 @@ class Main extends Component {
                 <div className="picture">
 
                 
-                <div className="craousel_controller_btn right"
-                                onClick={() => {this.setState({
-                                    i: this.state.i+1
-                                })}}
-                            >
+                   <div className="craousel_controller_btn right"
+                        onClick={() => {this.setState({
+                                    i: this.state.i+1 })
+                                    }
+                                }
+                   >
                                 <Icon name="left-arrow"/>
-                            </div>                 
+                   </div>                 
                   
 
-                   <Scrollbars style={{flexBasis:"46rem",zIndex:"9"}} renderThumbHorizontal={this.renderThumb}
+                   <Scrollbars style={{flexBasis:"70vh",zIndex:"9"}} renderThumbHorizontal={this.renderThumb}
                                renderThumbVertical={this.renderThumb} renderTrackHorizontal={this.renderTrackHorizontal}
                                renderTrackVertical={this.renderTrackVertical}
                    >

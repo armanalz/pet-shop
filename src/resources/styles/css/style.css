@@ -44,6 +44,11 @@ COLORS
   margin: 0 auto;
   font-family: 'Roboto Condensed', sans-serif;
 }
+@media only screen and (max-width: 1080px) {
+  .main_wrapper {
+    flex-direction: column-reverse;
+  }
+}
 .description {
   flex-basis: 37%;
   background: #FDFDFD;
@@ -57,21 +62,33 @@ COLORS
   color: #222222;
   font-size: 1.3rem;
   height: 2rem;
+  transition: transform 0.5s;
 }
 .description_navbar.button {
-  margin-right: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  transition: all 0.05s;
+}
+.description_navbar.button:hover {
+  background: rgba(167, 166, 166, 0.1);
 }
 .description_navbar.button.bar {
   height: 2px;
-  width: 1.9rem;
+  width: 1.8rem;
   background: #222222;
 }
-.description_navbar.button.bar:last-child {
-  margin-top: 4px;
+.description_navbar.button.bar:not(:last-child) {
+  margin-bottom: 3px;
+}
+.description_navbar.wrapper {
+  transform: scaleX(1) translateX(50px);
+  transform-origin: left;
 }
 .description_navbar.item {
   margin-right: 2.5rem;
@@ -124,8 +141,10 @@ COLORS
   font-size: 1.3rem;
   color: #a7a6a6;
 }
-.craousel_controller {
-  cursor: pointer;
+@media only screen and (max-width: 1080px) {
+  .craousel_controller {
+    visibility: hidden;
+  }
 }
 .craousel_controller.left {
   display: flex;
@@ -146,6 +165,11 @@ COLORS
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+@media only screen and (max-width: 1080px) {
+  .craousel_controller_btn {
+    visibility: hidden;
+  }
 }
 .craousel_controller_btn.left {
   background: #222222;
@@ -170,7 +194,6 @@ COLORS
   display: flex;
   flex-direction: column;
   flex-basis: 63%;
-  height: 100%;
   position: relative;
 }
 .picture_large {
@@ -203,6 +226,11 @@ COLORS
   color: #222222;
   font-weight: 500;
   text-transform: capitalize;
+}
+@media only screen and (max-width: 1080px) {
+  .picture_intro_txt {
+    padding: 2rem 2rem 2rem 0;
+  }
 }
 .left-arrow {
   fill: #a7a6a6;
