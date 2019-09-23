@@ -8,7 +8,7 @@
     margin: 0 auto;
     font-family: @main-font;
 
-    .responsive(1080px, {
+    .responsive(900px, {
 
         flex-direction: column-reverse;
 
@@ -20,7 +20,13 @@
     flex-basis: 37%;
     background:@description-bg;
     padding: 5rem;
-    height: 100%;
+
+    .responsive(900px, {
+
+        padding:0 5rem 5rem 5rem;
+ 
+     });
+
 
     &_navbar {
 
@@ -31,6 +37,12 @@
         font-size: 1.3rem;
         height: 2rem;
         transition: transform .5s;
+
+        .responsive(900px, {
+
+           display: none;
+    
+        });
 
         &.button {
 
@@ -90,6 +102,12 @@
         text-align: center;
         margin: 3rem 5rem 0 auto;
 
+        .responsive(900px, {
+
+            margin: 0 auto;
+    
+        });
+
     }
 
     &_subtitle {
@@ -99,7 +117,12 @@
         text-align: center;
         margin: 0 6rem 7rem auto;
         font-weight: 500;
+        
+        .responsive(900px, {
 
+            margin: 0 auto 7rem auto;
+    
+        });
     }
 
     &_specification {
@@ -109,12 +132,25 @@
         text-transform: capitalize;
         margin: 0 0 2rem 0;
 
+        .responsive(900px, {
+
+            margin: 2rem auto;
+    
+        });
+
         &_title {
 
             color: @light-font;
             margin: 0 5.5rem 0 0;
             display: flex;
             flex-basis: 7.5rem;
+
+            .between(900px, 600px, {
+
+                flex-basis: 15rem;
+                margin: 0 5.5rem 0 4rem;
+        
+            });
 
         }
 
@@ -130,6 +166,7 @@
 
                    margin-right: 5rem;
                    width: 7rem;
+                   
                 }
             }
         }
@@ -155,7 +192,7 @@
 
 .craousel_controller {
 
-    .responsive(1080px, {
+    .responsive(900px, {
 
        visibility: hidden;
 
@@ -233,7 +270,6 @@
     display: flex;
     flex-direction: column;
     flex-basis: 63%;
-  //  height: 100%;
     position: relative;
 
 
@@ -241,6 +277,7 @@
 
         height: 90rem;
         background-size:cover;
+        background-position: top center;
 
     }
 
@@ -254,10 +291,22 @@
         flex-shrink: 0;
         flex-grow: 1;
 
+        .responsive(480px, {
+
+            flex-direction: column;
+    
+        });
+
         &_img {
              
             flex-basis: 35%;
-            z-index:999999;
+            z-index:99;
+
+            .responsive(480px, {
+
+                flex-basis: auto;
+        
+            });
             
            
 
@@ -267,6 +316,12 @@
                 width: 18rem;
                 margin: -10rem 5rem 5rem 5rem;
                 border-radius: 2px;
+
+                .responsive(480px, {
+
+                    margin: -10rem 3rem 2rem 3rem;
+            
+                });
                
             }
         }
@@ -285,8 +340,32 @@
                 padding: 2rem 2rem 2rem 0;
 
             });
+
+            .responsive(480px, {
+
+                flex-basis:auto;
+                padding: 0 2rem 2rem 3rem;
+                
+            });
         }
 
     }
 
 } //picture
+
+.sidedrawer {
+
+    height: 4rem;
+    width: 4rem;
+    position: fixed;
+    left: 3rem;
+    top: 3rem;
+    display: none;
+    z-index: 999;
+
+    .responsive(900px, {
+
+        display: block;
+        
+    });
+}

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Icon from './utilities/Icon';
+import SideDrawer from './utilities/SideDrawer';
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 
 
 class Main extends Component {
@@ -9,6 +12,7 @@ class Main extends Component {
 
         i : 0,
         openMenu:false,
+        drawerOpen:false,
 
         petSpecifications : {
 
@@ -46,6 +50,12 @@ class Main extends Component {
                 style={{ ...style, ...thumbStyle }}
                 {...props}/>
         );
+    }
+
+    toggleDrawer=(value)=>{
+        this.setState({
+            drawerOpen:value
+        })
     }
 
     renderTrackVertical = ({ style, ...props }) => {
@@ -96,8 +106,21 @@ class Main extends Component {
         
 
         return (
+            
             <main className="main_wrapper">
-
+                <div className="sidedrawer">
+                        <IconButton area-label="Menue" color="inherit" 
+                                    onClick={()=>this.toggleDrawer(true)} 
+                                    style={{background:"#fff"}}
+                        >
+                                    <MenuIcon  style={{width:"26px",height:"24px"}}/>
+                        </IconButton>
+                            
+                        <SideDrawer
+                                    open={this.state.drawerOpen}
+                                    onClose={(value)=> this.toggleDrawer(value)}
+                        />
+                </div> 
                 <div className="description">
 
                     <div className="description_navbar">
@@ -201,7 +224,8 @@ class Main extends Component {
                 </div> {/* description */}
 
                 <div className="picture">
-
+                    
+                   
                 
                    <div className="craousel_controller_btn right"
                         onClick={() => {this.setState({
@@ -219,8 +243,7 @@ class Main extends Component {
                    >
                         <div className="picture_large"
                             style={{backgroundImage:`url(${bg})`}}
-                        >
-                            
+                        > 
                         </div>
                    </Scrollbars>
                    
