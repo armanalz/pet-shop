@@ -1,4 +1,4 @@
-This project deployed [Here](https://armanalz.github.io/sneakers/).
+This project deployed [Here](https://armanalz.github.io/pet-shop/).
 
 ## pet-shop
 
