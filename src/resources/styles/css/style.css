@@ -59,6 +59,11 @@ COLORS
     padding: 0 5rem 5rem 5rem;
   }
 }
+@media only screen and (max-width: 600px) {
+  .description {
+    padding: 0 5rem 5rem 3rem;
+  }
+}
 .description_navbar {
   display: flex;
   justify-content: flex-start;
@@ -151,6 +156,11 @@ COLORS
     margin: 0 5.5rem 0 4rem;
   }
 }
+@media only screen and (max-width: 600px) {
+  .description_specification_title {
+    margin: 0 3.5rem 0 0;
+  }
+}
 .description_specification_value {
   color: #222222;
 }
@@ -167,9 +177,19 @@ COLORS
   justify-content: space-between;
   margin: 8rem 0 0 0;
 }
+@media only screen and (max-width: 600px) {
+  .description_footer {
+    flex-direction: column;
+  }
+}
 .description_footer_item {
   font-size: 1.3rem;
   color: #a7a6a6;
+}
+@media only screen and (max-width: 600px) {
+  .description_footer_item {
+    margin: 1rem auto 0 auto;
+  }
 }
 @media only screen and (max-width: 900px) {
   .craousel_controller {

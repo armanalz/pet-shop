@@ -13,6 +13,7 @@ class Main extends Component {
         i : 0,
         openMenu:false,
         drawerOpen:false,
+        startX:null,
 
         petSpecifications : {
 
@@ -38,7 +39,7 @@ class Main extends Component {
     }
 
     renderThumb = ({ style, ...props }) => {
-        const { top } = this.state;
+       
         const thumbStyle = {
 
             backgroundColor: "#FDFDFD",
@@ -57,6 +58,68 @@ class Main extends Component {
             drawerOpen:value
         })
     }
+
+    sliderHandler = (e) => {
+
+        if(e.target.id === "right" && this.state.i < 3) {
+
+            this.setState({i: this.state.i+1 })
+
+        }else if(e.target.id === "right" && this.state.i >= 3) {
+
+                this.setState({ i : 0 })
+
+        }else if(e.target.id === "left" && this.state.i > 0) {
+
+            this.setState({i: this.state.i-1 })
+
+        }else if(e.target.id === "left" && this.state.i <= 0) {
+
+            this.setState({ i : 3 })
+
+        }
+        
+    }
+
+    touchStartHandler = (e) => {
+
+        let touch = e.touches[0]
+        let clientStart = touch.clientX
+        this.setState({startX : clientStart })
+        
+    }
+
+    touchEndHandler = (e) => {
+
+        let changed = e.changedTouches[0];
+        let clientEnd = changed.clientX
+        let x1 = this.state.startX
+        let x2 = clientEnd
+       
+            if(x1-x2 > 100 && this.state.i < 3) {
+
+                this.setState({ i: this.state.i+1, endX: null, startX: null })
+    
+            }else if(x1-x2 > 100 && this.state.i >= 3) {
+    
+                this.setState({ i: 0, endX: null, startX: null })
+    
+            }else if(x1-x2 < -100 && this.state.i > 0) {
+    
+                this.setState({ i: this.state.i-1, endX: null, startX: null })
+    
+            }else if(x1-x2 < -100 && this.state.i <= 0) {
+    
+                this.setState({ i: 3, endX: null, startX: null })
+    
+            }else {
+    
+                this.setState({ endX: null, startX: null })
+
+            }
+        
+    }
+
 
     renderTrackVertical = ({ style, ...props }) => {
         const finalStyle = {
@@ -78,22 +141,17 @@ class Main extends Component {
         })
     }
 
+
     render() {
 
         let bg,img,transform
 
-        if( this.state.i < 0 ) {
+       
 
-            this.setState({ i:3})
-            
-        }else if(this.state.i > 3){
-
-            this.setState({ i:0})
-            
-        }else {
             bg = require(`../resources/img/slide-${this.state.i}.jpg`)
             img = require(`../resources/img/img-${this.state.i}.jpg`)
-        } 
+            
+       
         
         if(this.state.openMenu) {
 
@@ -103,6 +161,8 @@ class Main extends Component {
 
             transform = "scale(1) translateX(70px)"
         }
+
+        
         
 
         return (
@@ -111,7 +171,7 @@ class Main extends Component {
                 <div className="sidedrawer">
                         <IconButton area-label="Menue" color="inherit" 
                                     onClick={()=>this.toggleDrawer(true)} 
-                                    style={{background:"#fff"}}
+                                    style={{background:"#FDFDFD"}}
                         >
                                     <MenuIcon  style={{width:"26px",height:"24px"}}/>
                         </IconButton>
@@ -147,11 +207,10 @@ class Main extends Component {
                     </div>
 
                     <div className="craousel_controller left">
-                        <div className="craousel_controller_btn left"
-                             onClick={() => {this.setState({
-                                 i: this.state.i-1
-                             })}}>
-                           <Icon name="left-arrow"/>
+                        <div id="left" className="craousel_controller_btn left"
+                             onClick={(e) => this.sliderHandler(e)}
+                        >
+                           <Icon id="left" name="left-arrow"/>
                         </div>                    
                     </div>
 
@@ -227,15 +286,12 @@ class Main extends Component {
                     
                    
                 
-                   <div className="craousel_controller_btn right"
-                        onClick={() => {this.setState({
-                                    i: this.state.i+1 })
-                                    }
-                                }
+                   <div id="right" className="craousel_controller_btn right"
+                        onClick={(e) => this.sliderHandler(e) }
                    >
-                                <Icon name="left-arrow"/>
+                                <Icon id="right" name="left-arrow"/>
                    </div>                 
-                  
+                   
 
                    <Scrollbars style={{flexBasis:"70vh",zIndex:"9"}} renderThumbHorizontal={this.renderThumb}
                                renderThumbVertical={this.renderThumb} renderTrackHorizontal={this.renderTrackHorizontal}
@@ -243,13 +299,19 @@ class Main extends Component {
                    >
                         <div className="picture_large"
                             style={{backgroundImage:`url(${bg})`}}
+
+                            onTouchStart={(e) => this.touchStartHandler(e)}
+                            onTouchEnd={(e) => this.touchEndHandler(e)}
+                           
                         > 
                         </div>
                    </Scrollbars>
                    
                     <div className="picture_intro">
                         <div className="picture_intro_img">
-                            <img src={img}/>
+
+                            <img  alt="j" src={img}/>
+                            
                         </div>
                         <div className="picture_intro_txt">
                            {this.state.petSpecifications.description[this.state.i]}
