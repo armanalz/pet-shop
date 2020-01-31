@@ -10,10 +10,12 @@ class Main extends Component {
 
     state = {
 
-        i : 0,
-        openMenu:false,
-        drawerOpen:false,
-        startX:null,
+        i: 0,
+        openMenu: false,
+        drawerOpen: false,
+        startX: null,
+        translate: 0,
+        origin: " ",
 
         petSpecifications : {
 
@@ -61,21 +63,23 @@ class Main extends Component {
 
     sliderHandler = (e) => {
 
+
         if(e.target.id === "right" && this.state.i < 3) {
 
             this.setState({i: this.state.i+1 })
 
         }else if(e.target.id === "right" && this.state.i >= 3) {
 
-                this.setState({ i : 0 })
+                this.setState({ i : 0 })         
 
         }else if(e.target.id === "left" && this.state.i > 0) {
 
             this.setState({i: this.state.i-1 })
-
+             
         }else if(e.target.id === "left" && this.state.i <= 0) {
 
             this.setState({ i : 3 })
+           
 
         }
         
@@ -89,32 +93,42 @@ class Main extends Component {
         
     }
 
+    touchMoveHandler = (e) => {
+
+        let currentX = e.touches[0].clientX;
+        let move = currentX-this.state.startX
+
+        if(currentX > this.state.startX){
+            this.setState({translate : move , origin: "right"  })
+        }else if(currentX < this.state.startX){
+            this.setState({translate : move, origin: "left"  })
+        }  
+
+    }
+
     touchEndHandler = (e) => {
 
         let changed = e.changedTouches[0];
         let clientEnd = changed.clientX
+        
         let x1 = this.state.startX
         let x2 = clientEnd
        
-            if(x1-x2 > 100 && this.state.i < 3) {
+            if(x1-x2 > 80 && this.state.i < 3) {
 
-                this.setState({ i: this.state.i+1, endX: null, startX: null })
+                    this.setState({ i: this.state.i+1, endX: null, startX: null , translate: 0})          
     
-            }else if(x1-x2 > 100 && this.state.i >= 3) {
+            }else if(x1-x2 > 80 && this.state.i >= 3) {
+
+                    this.setState({ i: 0, endX: null, startX: null , translate:0})
     
-                this.setState({ i: 0, endX: null, startX: null })
-    
-            }else if(x1-x2 < -100 && this.state.i > 0) {
-    
-                this.setState({ i: this.state.i-1, endX: null, startX: null })
-    
-            }else if(x1-x2 < -100 && this.state.i <= 0) {
-    
-                this.setState({ i: 3, endX: null, startX: null })
+            }else if(x1-x2 < -80 && this.state.i > 0) {
+              
+                this.setState({ i: this.state.i-1, endX: null, startX: null, translate: 0})
     
             }else {
     
-                this.setState({ endX: null, startX: null })
+                this.setState({ endX: null, startX: null, translate: 0})
 
             }
         
@@ -144,14 +158,12 @@ class Main extends Component {
 
     render() {
 
-        let bg,img,transform
+        let img,transform,gout
 
-       
-
-            bg = require(`../resources/img/slide-${this.state.i}.jpg`)
+            gout  = (window.innerWidth)*(this.state.i)
+    
             img = require(`../resources/img/img-${this.state.i}.jpg`)
-            
-       
+                  
         
         if(this.state.openMenu) {
 
@@ -161,9 +173,7 @@ class Main extends Component {
 
             transform = "scale(1) translateX(70px)"
         }
-
-        
-        
+            
 
         return (
             
@@ -293,17 +303,64 @@ class Main extends Component {
                    </div>                 
                    
 
-                   <Scrollbars style={{flexBasis:"70vh",zIndex:"9"}} renderThumbHorizontal={this.renderThumb}
-                               renderThumbVertical={this.renderThumb} renderTrackHorizontal={this.renderTrackHorizontal}
+                   <Scrollbars style={{flexBasis:"70vh",zIndex:"9",overflowX:"hidden"}} renderView={props => (
+                                      <div {...props} style={{ ...props.style, overflowX: 'hidden' }} />
+                               )}
+                               renderThumbVertical={this.renderThumb} 
                                renderTrackVertical={this.renderTrackVertical}
                    >
-                        <div className="picture_large"
-                            style={{backgroundImage:`url(${bg})`}}
+                        <div className={`picture_large ${this.state.origin}`}>
 
-                            onTouchStart={(e) => this.touchStartHandler(e)}
-                            onTouchEnd={(e) => this.touchEndHandler(e)}
-                           
-                        > 
+                            <div className="picture_large-slider"
+                                 onTouchStart={(e) => this.touchStartHandler(e)}
+                                 onTouchMove={(e) => this.touchMoveHandler(e)}
+                                 onTouchEnd={(e) => this.touchEndHandler(e)}
+                                 style={{ 
+                                    
+                                      left: window.innerWidth <= 900 ? `${-gout}px` : "0",
+                                      transform: window.innerWidth <= 900 ? `translateX(${this.state.translate}px)` : ""
+                                 }}
+                            >
+                              
+                                <div className="picture_large-item first"
+                                    style={{
+                                            
+                                              display: window.innerWidth > 900 && this.state.i === 0 ? "block" :
+                                                       window.innerWidth <= 900 ? "block" : "none"
+                                    
+                                            }}
+                                >
+                                </div>
+                                <div className="picture_large-item second "
+                                    style={{
+                                            
+                                              display: window.innerWidth > 900 && this.state.i === 1 ? "block" :
+                                                       window.innerWidth <= 900 ? "block" : "none"
+                                        
+                                            }}
+                                >
+                                </div>
+                                <div className="picture_large-item third "
+                                    style={{
+                                            
+                                              display: window.innerWidth > 900 && this.state.i === 2 ? "block" :
+                                                       window.innerWidth <= 900 ? "block" : "none"
+                                            
+                                            }}
+                                >
+                                </div>
+                                <div className="picture_large-item forth "
+                                    style={{
+                                            
+                                              display: window.innerWidth > 900 && this.state.i === 3 ? "block" :
+                                                       window.innerWidth <= 900 ? "block" : "none"
+                                            
+                                            }}
+                                >
+                                </div>
+
+                            </div>
+
                         </div>
                    </Scrollbars>
                    
