@@ -1,6 +1,7 @@
 {
   "name": "pet-shop",
   "version": "0.1.0",
+  "homepage": "https://armanalz.github.io/pet-shop/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.4.3",
@@ -15,6 +16,8 @@
     "build": "react-scripts build",
     "watch:less": "less-watch-compiler src/resources/styles/less src/resources/styles/css",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
