@@ -3,6 +3,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import Icon from './utilities/Icon';
 import SideDrawer from './utilities/SideDrawer';
 import MenuIcon from '@material-ui/icons/Menu';
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import IconButton from '@material-ui/core/IconButton';
 
 
@@ -11,10 +12,12 @@ class Main extends Component {
     state = {
 
         i: 0,
+        loading: false,
         openMenu: false,
         drawerOpen: false,
         startX: null,
         translate: 0,
+        blink: "",
         origin: " ",
 
         petSpecifications : {
@@ -40,6 +43,14 @@ class Main extends Component {
           }
     }
 
+    onLoadHandler = () => {
+
+        this.setState({
+            loading: true
+        })
+
+    }
+
     renderThumb = ({ style, ...props }) => {
        
         const thumbStyle = {
@@ -55,9 +66,9 @@ class Main extends Component {
         );
     }
 
-    toggleDrawer=(value)=>{
+    toggleDrawer = (value) => {
         this.setState({
-            drawerOpen:value
+            drawerOpen: value
         })
     }
 
@@ -66,19 +77,19 @@ class Main extends Component {
 
         if(e.target.id === "right" && this.state.i < 3) {
 
-            this.setState({i: this.state.i+1 })
+            this.setState({ i: this.state.i+1 ,  loading: false })
 
-        }else if(e.target.id === "right" && this.state.i >= 3) {
+        }else if( e.target.id === "right" && this.state.i >= 3 ) {
 
-                this.setState({ i : 0 })         
+                this.setState({ i : 0,  loading: false })         
 
-        }else if(e.target.id === "left" && this.state.i > 0) {
+        }else if( e.target.id === "left" && this.state.i > 0 ) {
 
-            this.setState({i: this.state.i-1 })
+            this.setState({ i: this.state.i-1,  loading: false })
              
-        }else if(e.target.id === "left" && this.state.i <= 0) {
+        }else if( e.target.id === "left" && this.state.i <= 0 ) {
 
-            this.setState({ i : 3 })
+            this.setState({ i : 3,  loading: false })
            
 
         }
@@ -89,7 +100,7 @@ class Main extends Component {
 
         let touch = e.touches[0]
         let clientStart = touch.clientX
-        this.setState({startX : clientStart })
+        this.setState({ startX : clientStart })
         
     }
 
@@ -98,11 +109,13 @@ class Main extends Component {
         let currentX = e.touches[0].clientX;
         let move = currentX-this.state.startX
 
-        if(currentX > this.state.startX){
-            this.setState({translate : move , origin: "right"  })
-        }else if(currentX < this.state.startX){
-            this.setState({translate : move, origin: "left"  })
-        }  
+        if( currentX > this.state.startX && this.state.i > 0 ){
+            this.setState({ translate : move , origin: "right" })
+        }else if( currentX < this.state.startX && this.state.i < 3 ){
+            this.setState({ translate : move, origin: "left" })
+        }else if( this.state.i === 0 || this.state.i === 3 ) {
+            this.setState({ blink: "span" })
+        } 
 
     }
 
@@ -114,21 +127,21 @@ class Main extends Component {
         let x1 = this.state.startX
         let x2 = clientEnd
        
-            if(x1-x2 > 80 && this.state.i < 3) {
+            if( x1-x2 > 80 && this.state.i < 3 ) {
 
-                    this.setState({ i: this.state.i+1, endX: null, startX: null , translate: 0})          
+                this.setState({ i: this.state.i+1, endX: null, startX: null , translate: 0 })          
     
-            }else if(x1-x2 > 80 && this.state.i >= 3) {
+            }else if( x1-x2 > 80 && this.state.i >= 3 ) {
 
-                    this.setState({ i: 0, endX: null, startX: null , translate:0})
+                this.setState({ endX: null, startX: null , translate:0, blink: "" })
     
-            }else if(x1-x2 < -80 && this.state.i > 0) {
+            }else if( x1-x2 < -80 && this.state.i > 0 ) {
               
-                this.setState({ i: this.state.i-1, endX: null, startX: null, translate: 0})
+                this.setState({ i: this.state.i-1, endX: null, startX: null, translate: 0 })
     
             }else {
     
-                this.setState({ endX: null, startX: null, translate: 0})
+                this.setState({ endX: null, startX: null, translate: 0, blink: "" })
 
             }
         
@@ -158,11 +171,15 @@ class Main extends Component {
 
     render() {
 
-        let img,transform,gout
+        let img,transform,gout,slide,winWidth
 
             gout  = (window.innerWidth)*(this.state.i)
     
             img = require(`../resources/img/img-${this.state.i}.jpg`)
+
+            slide = require(`../resources/img/slide-${this.state.i}.jpg`)
+
+            winWidth = window.innerWidth
                   
         
         if(this.state.openMenu) {
@@ -317,57 +334,83 @@ class Main extends Component {
                                  onTouchEnd={(e) => this.touchEndHandler(e)}
                                  style={{ 
                                     
-                                      left: window.innerWidth <= 900 ? `${-gout}px` : "0",
-                                      transform: window.innerWidth <= 900 ? `translateX(${this.state.translate}px)` : ""
+                                      left: winWidth <= 900 ? `${-gout}px` : "0",
+                                      transform: winWidth <= 900 ? `translateX(${this.state.translate}px)` : ""
                                  }}
                             >
                               
-                                <div className="picture_large-item first"
-                                    style={{
-                                            
-                                              display: window.innerWidth > 900 && this.state.i === 0 ? "block" :
-                                                       window.innerWidth <= 900 ? "block" : "none"
-                                    
-                                            }}
-                                >
-                                </div>
-                                <div className="picture_large-item second "
-                                    style={{
-                                            
-                                              display: window.innerWidth > 900 && this.state.i === 1 ? "block" :
-                                                       window.innerWidth <= 900 ? "block" : "none"
+                                <div className="picture_large-item primary">
+                                    <div className="picture_large-item--blinker left"
+                                         style={{animationName: this.state.blink}}
                                         
-                                            }}
-                                >
+                                    >
+                                    </div>
+                                    <img className="picture_large-item--img"
+                                         onLoad={() => this.onLoadHandler()}
+                                         style={{
+                                                
+                                                display:`${this.state.loading ? "block" : "none"}`
+                                        
+                                             }}
+                                         src={ winWidth > 900 ? slide : require(`../resources/img/slide-0.jpg`)}
+                                         alt="First Slide"
+                                       
+                                    />
+                                    <div className="picture_large-spinner">
+                                        <ClimbingBoxLoader size={50} color={"#EEE"} loading={!this.state.loading}/>
+                                    </div>
                                 </div>
-                                <div className="picture_large-item third "
-                                    style={{
+                                <div className="picture_large-item secondary">
+                                    <img className="picture_large-item--img"
+                                         onload={() => this.onLoadHandler()}
+                                         style={{
+                                                
+                                                display:`${this.state.loading ? "block" : "none"}`
                                             
-                                              display: window.innerWidth > 900 && this.state.i === 2 ? "block" :
-                                                       window.innerWidth <= 900 ? "block" : "none"
-                                            
-                                            }}
-                                >
+                                             }}
+                                         src={ winWidth > 900 ? slide : require(`../resources/img/slide-1.jpg`)}
+                                         alt="Second Slide"
+                                   />
                                 </div>
-                                <div className="picture_large-item forth "
-                                    style={{
-                                            
-                                              display: window.innerWidth > 900 && this.state.i === 3 ? "block" :
-                                                       window.innerWidth <= 900 ? "block" : "none"
-                                            
-                                            }}
-                                >
+                                <div className="picture_large-item secondary">
+                                    <img className="picture_large-item--img"
+                                         onload={() => this.onLoadHandler()}
+                                         style={{
+                                                
+                                                display:`${this.state.loading ? "block" : "none"}`
+                                                
+                                             }}
+                                         src={ winWidth > 900 ? slide : require(`../resources/img/slide-2.jpg`)}
+                                         alt="Third Slide"
+                                   />
                                 </div>
+                                <div className="picture_large-item secondary">
+                                    <img className="picture_large-item--img"
+                                         onload={() => this.onLoadHandler()}
+                                         style={{
+                                                
+                                                display:`${this.state.loading ? "block" : "none"}`
+                                                
+                                             }}
+                                         src={ winWidth > 900 ? slide : require(`../resources/img/slide-3.jpg`)}
+                                         alt="Forth Slide"
+                                   />
+                                   <div className="picture_large-item--blinker right"
+                                         style={{animationName: this.state.blink}}
+                                        
+                                    >
+                                    </div>
+                                </div>
+                                
+                            </div>   {/* picture_large-slider */}
 
-                            </div>
-
-                        </div>
+                        </div> {/* picture_large */}
                    </Scrollbars>
                    
                     <div className="picture_intro">
                         <div className="picture_intro_img">
 
-                            <img  alt="j" src={img}/>
+                            <img  alt="Small Bild" src={img} />
                             
                         </div>
                         <div className="picture_intro_txt">
