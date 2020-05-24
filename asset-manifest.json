@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/pet-shop/static/css/main.1f19af96.chunk.css",
+    "main.js": "/pet-shop/static/js/main.fa8cb48a.chunk.js",
+    "main.js.map": "/pet-shop/static/js/main.fa8cb48a.chunk.js.map",
+    "runtime-main.js": "/pet-shop/static/js/runtime-main.e2dfc538.js",
+    "runtime-main.js.map": "/pet-shop/static/js/runtime-main.e2dfc538.js.map",
+    "static/js/2.f2ccd324.chunk.js": "/pet-shop/static/js/2.f2ccd324.chunk.js",
+    "static/js/2.f2ccd324.chunk.js.map": "/pet-shop/static/js/2.f2ccd324.chunk.js.map",
+    "index.html": "/pet-shop/index.html",
+    "precache-manifest.6c66581fbd9b90d7e13d091fc44186e3.js": "/pet-shop/precache-manifest.6c66581fbd9b90d7e13d091fc44186e3.js",
+    "service-worker.js": "/pet-shop/service-worker.js",
+    "static/css/main.1f19af96.chunk.css.map": "/pet-shop/static/css/main.1f19af96.chunk.css.map",
+    "static/js/2.f2ccd324.chunk.js.LICENSE": "/pet-shop/static/js/2.f2ccd324.chunk.js.LICENSE",
+    "static/media/img-0.jpg": "/pet-shop/static/media/img-0.4fab0456.jpg",
+    "static/media/img-1.jpg": "/pet-shop/static/media/img-1.699ce926.jpg",
+    "static/media/img-2.jpg": "/pet-shop/static/media/img-2.a3cdcd26.jpg",
+    "static/media/img-3.jpg": "/pet-shop/static/media/img-3.38ac1a55.jpg",
+    "static/media/slide-0.jpg": "/pet-shop/static/media/slide-0.48d68d38.jpg",
+    "static/media/slide-1.jpg": "/pet-shop/static/media/slide-1.65c1ca31.jpg",
+    "static/media/slide-2.jpg": "/pet-shop/static/media/slide-2.b05061fc.jpg",
+    "static/media/slide-3.jpg": "/pet-shop/static/media/slide-3.c35f80ef.jpg",
+    "static/media/sprite.svg": "/pet-shop/static/media/sprite.1b530fd3.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e2dfc538.js",
+    "static/js/2.f2ccd324.chunk.js",
+    "static/css/main.1f19af96.chunk.css",
+    "static/js/main.fa8cb48a.chunk.js"
+  ]
+}
